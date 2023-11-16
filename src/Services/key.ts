@@ -31,7 +31,8 @@ export function importRemotePublicKey(remoteLocation: string): void
 }
 
 /**
- * Return the location of pebble authenticator public defined in .env file.
+ * Return the location of pebble authenticator public as defined in the global
+ * environment configuration
  */
 export function getRemoteKeysLocationURI(): string
 {
