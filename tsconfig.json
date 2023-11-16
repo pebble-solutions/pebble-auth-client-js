@@ -4,5 +4,6 @@
     "target": "ES2016",
     "strict": false,
     "moduleResolution": "node"
-  }
+  },
+  "include": ["src"]
 }
