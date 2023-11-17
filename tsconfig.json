@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ES2016",
-    "strict": false,
-    "moduleResolution": "node"
+    "rootDir": "src",
+    "target": "ES2022",
+    "strict": true,
+    "moduleResolution": "node",
+    "declaration": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "tests"]
 }

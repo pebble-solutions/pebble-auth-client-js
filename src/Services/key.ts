@@ -19,6 +19,7 @@ export function getJWKSet(): JSONWebKeySet
         process.env.PBL_AUTH_JWKS = JSON.stringify(readPublicKey())
     }
     return JSON.parse(process.env.PBL_AUTH_JWKS)
+    // The following key is fake. For development only
     /*return {
         keys: [
             {

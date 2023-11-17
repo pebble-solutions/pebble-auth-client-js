@@ -24,14 +24,14 @@ export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string
 {
     return {
         aud: <string>jwtPayload.aud,
-        iss: jwtPayload.iss,
+        iss: <string>jwtPayload.iss,
         tid: <string>jwtPayload.tid,
-        sub: jwtPayload.sub,
+        sub: <string>jwtPayload.sub,
         roles: <string[]>jwtPayload.roles,
         lv: <number>jwtPayload.lv,
         name: <string>jwtPayload.name,
         iat: jwtPayload.iat,
-        exp: jwtPayload.exp,
+        exp: <number>jwtPayload.exp,
         token
     }
 }
