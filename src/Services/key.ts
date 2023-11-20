@@ -1,12 +1,25 @@
 import {JSONWebKeySet} from "jose";
 import { get as getHttps } from "https"
 import { createWriteStream, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs"
+import {EmptyJWKSRemoteURIError} from "./Errors/EmptyJWKSRemoteURIError";
+import {EmptyJWKSError} from "./Errors/EmptyJWKSError";
 
 /**
- * Return the location of pebble authenticator public as defined in the sys global
+ * Return the location of remote pebble authenticator public keys set (JWKS) as defined in the sys global
  * environment variables
  */
-export const AUTH_PUBLIC_KEYS_URI = process.env.PBL_AUTH_PUBLIC_KEYS_URI
+const JWKS_REMOTE_URI = process.env.PBL_JWKS_REMOTE_URI
+
+/**
+ * Contains the local folder for temporary store authentication credentials. Storing locally the credentials improves
+ * server response.
+ */
+const CERTS_FOLDER: string = "./var/credentials/auth"
+
+/**
+ * Contains the local path for the public keys set (JWKS)
+ */
+const JWKS_LOCAL_PATH: string = CERTS_FOLDER+"/jwks.json"
 
 /**
  * Get the public keys stored in /var/credentials/auth/certs
@@ -19,32 +32,19 @@ export async function getJWKSet(): Promise<JSONWebKeySet>
         process.env.PBL_AUTH_JWKS = JSON.stringify(await readPublicKey())
     }
     return JSON.parse(process.env.PBL_AUTH_JWKS)
-    // The following key is fake. For development only
-    /*return {
-        keys: [
-            {
-                kty: 'RSA',
-                e: 'AQAB',
-                n: '12oBZRhCiZFJLcPg59LkZZ9mdhSMTKAQZYq32k_ti5SBB6jerkh-WzOMAO664r_qyLkqHUSp3u5SbXtseZEpN3XPWGKSxjsy-1JyEFTdLSYe6f9gfrmxkUF_7DTpq0gn6rntP05g2-wFW50YO7mosfdslfrTJYWHFhJALabAeYirYD7-9kqq9ebfFMF4sRRELbv9oi36As6Q9B3Qb5_C1rAzqfao_PCsf9EPsTZsVVVkA5qoIAr47lo1ipfiBPxUCCNSdvkmDTYgvvRm6ZoMjFbvOtgyts55fXKdMWv7I9HMD5HwE9uW839PWA514qhbcIsXEYSFMPMV6fnlsiZvQQ',
-                alg: 'PS256',
-            }
-        ],
-    }*/
 }
 
 /**
- * Import the public RSA key from a remote server to the local
- * /var/credentials/auth/certs file and store it in sys environment
- * variable.
+ * Import the public RSA key from a remote server to the local /var/credentials/auth/jwks.json file.
  *
  * @param remoteLocation        Remote file that must be imported
  */
 export function importRemotePublicKey(remoteLocation: string): Promise<void>
 {
     return new Promise((resolve, reject) => {
-        mkdirSync("./var/credentials/auth", { recursive: true })
-        writeFileSync("./var/credentials/auth/certs", "")
-        const file = createWriteStream("./var/credentials/auth/certs")
+        mkdirSync(CERTS_FOLDER, { recursive: true })
+        writeFileSync(JWKS_LOCAL_PATH, "")
+        const file = createWriteStream(JWKS_LOCAL_PATH)
         getHttps(remoteLocation, (resp) => {
             const stream = resp.pipe(file);
 
@@ -64,12 +64,18 @@ export function importRemotePublicKey(remoteLocation: string): Promise<void>
  */
 async function readPublicKey(): Promise<JSONWebKeySet>
 {
-    const path = "./var/credentials/auth/certs"
-
-    if (!existsSync(path)) {
-        await importRemotePublicKey(<string>AUTH_PUBLIC_KEYS_URI)
+    if (!existsSync(JWKS_LOCAL_PATH)) {
+        if (!JWKS_REMOTE_URI) {
+            throw new EmptyJWKSRemoteURIError()
+        }
+        await importRemotePublicKey(JWKS_REMOTE_URI)
     }
 
-    const data = readFileSync(path, 'utf8')
+    const data = readFileSync(JWKS_LOCAL_PATH, 'utf8')
+
+    if (!data) {
+        throw new EmptyJWKSError()
+    }
+
     return JSON.parse(data)
 }
