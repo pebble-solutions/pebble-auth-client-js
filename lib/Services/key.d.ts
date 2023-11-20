@@ -9,7 +9,7 @@ export declare const AUTH_PUBLIC_KEYS_URI: string | undefined;
  * This file contain a copy of the pebble auth public keys formatted in
  * JWK Set format.
  */
-export declare function getJWKSet(): JSONWebKeySet;
+export declare function getJWKSet(): Promise<JSONWebKeySet>;
 /**
  * Import the public RSA key from a remote server to the local
  * /var/credentials/auth/certs file and store it in sys environment

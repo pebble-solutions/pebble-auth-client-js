@@ -11,7 +11,10 @@ import {getJWKSet} from "./key";
  */
 export async function auth(token: string): Promise<PebbleAuthTokenInterface>
 {
-    const JWKS = createLocalJWKSet(getJWKSet())
+    const keySet = await getJWKSet()
+    const JWKS = createLocalJWKSet(keySet)
+
+    console.log("jwks", keySet)
 
     const { payload, protectedHeader } = await jwtVerify(token, JWKS)
 

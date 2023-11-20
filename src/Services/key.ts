@@ -1,6 +1,6 @@
-import {JSONWebKeySet, JWK} from "jose";
-import { get as getHttp } from "http"
-import { createWriteStream, readFileSync } from "fs"
+import {JSONWebKeySet} from "jose";
+import { get as getHttps } from "https"
+import { createWriteStream, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs"
 
 /**
  * Return the location of pebble authenticator public as defined in the sys global
@@ -13,10 +13,10 @@ export const AUTH_PUBLIC_KEYS_URI = process.env.PBL_AUTH_PUBLIC_KEYS_URI
  * This file contain a copy of the pebble auth public keys formatted in
  * JWK Set format.
  */
-export function getJWKSet(): JSONWebKeySet
+export async function getJWKSet(): Promise<JSONWebKeySet>
 {
     if (!process.env.PBL_AUTH_JWKS) {
-        process.env.PBL_AUTH_JWKS = JSON.stringify(readPublicKey())
+        process.env.PBL_AUTH_JWKS = JSON.stringify(await readPublicKey())
     }
     return JSON.parse(process.env.PBL_AUTH_JWKS)
     // The following key is fake. For development only
@@ -42,8 +42,10 @@ export function getJWKSet(): JSONWebKeySet
 export function importRemotePublicKey(remoteLocation: string): Promise<void>
 {
     return new Promise((resolve, reject) => {
-        const file = createWriteStream("/var/credentials/auth/certs")
-        getHttp(remoteLocation, (resp) => {
+        mkdirSync("./var/credentials/auth", { recursive: true })
+        writeFileSync("./var/credentials/auth/certs", "")
+        const file = createWriteStream("./var/credentials/auth/certs")
+        getHttps(remoteLocation, (resp) => {
             const stream = resp.pipe(file);
 
             stream.on("finish", () => {
@@ -60,8 +62,14 @@ export function importRemotePublicKey(remoteLocation: string): Promise<void>
  * Read the public RSA key from /var/credentials/auth/certs and convert it into
  * JWK Set
  */
-function readPublicKey(): Promise<JSONWebKeySet>
+async function readPublicKey(): Promise<JSONWebKeySet>
 {
-    const data = readFileSync("/var/credentials/auth/certs", 'utf8')
+    const path = "./var/credentials/auth/certs"
+
+    if (!existsSync(path)) {
+        await importRemotePublicKey(<string>AUTH_PUBLIC_KEYS_URI)
+    }
+
+    const data = readFileSync(path, 'utf8')
     return JSON.parse(data)
 }
