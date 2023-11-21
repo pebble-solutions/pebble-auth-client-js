@@ -29,6 +29,7 @@ const JWKS_LOCAL_PATH: string = CERTS_FOLDER+"/jwks.json"
 export async function getJWKSet(): Promise<JSONWebKeySet>
 {
     if (!process.env.PBL_AUTH_JWKS) {
+        console.log("NOTICE: Store JWKS in process environment variable")
         process.env.PBL_AUTH_JWKS = JSON.stringify(await readPublicKey())
     }
     return JSON.parse(process.env.PBL_AUTH_JWKS)
