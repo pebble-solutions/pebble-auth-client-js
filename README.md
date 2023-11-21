@@ -26,15 +26,30 @@ If the file does not exist, it will be created.
 your terminal before starting your NodeJS server :**
 
 ```Shell
-export PBL_JWKS_REMOTE_URI=https://AUTH_SERVER_URI/path/jwks.json
+export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 ```
 
 **If you start your NodeJS server within a Docker container, you should add this
 line to your Dockefile :**
 
 ```Dockerfile
-RUN export PBL_JWKS_REMOTE_URI=https://AUTH_SERVER_URI/path/jwks.json
+RUN export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 ```
+
+### Test keys pair
+
+**Warn :** These key files are not secured and must be used FOR TESTING PURPOSE 
+ONLY on a local development environment !
+
+**JWKS URI (for PBL_JWKS_REMOTE_URI environment variable)**
+
+https://storage.googleapis.com/pebble-public-cdn/test_auth/jwks_test.json
+
+**Public and private keys used to sign a token**
+
+https://storage.googleapis.com/pebble-public-cdn/test_auth/public_test.pem
+
+https://storage.googleapis.com/pebble-public-cdn/test_auth/private_test.pem
 
 ### Authenticate with token string
 
@@ -65,10 +80,10 @@ const http = require('http')
 
 const server = http.createServer(async (req, res) => {
     try {
-        const pblToken = await authFromHttpHeaders(req.headers)
-        console.log(pblToken)
-        console.log(pblToken.getUser())
-        console.log(pblToken.getAuthenticatedLicence())
+        const authToken = await authFromHttpHeaders(req.headers)
+        console.log(authToken)
+        console.log(authToken.getUser())
+        console.log(authToken.getAuthenticatedLicence())
         res.end("You are authenticated");
     }
     catch (e) {
