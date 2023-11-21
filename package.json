@@ -4,6 +4,7 @@
   "description": "Pebble client tool for authenticate user and licence management written in TypeScript.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "homepage": "https://github.com/pebble-solutions/pebble-auth-client-js",
   "files": [
     "dist/**/*"
   ],
