@@ -3,6 +3,8 @@ import {jwtVerify, createLocalJWKSet} from "jose";
 import {getTokenDataFromJWTPayload} from "./token";
 import PebbleAuthToken from "../Models/PebbleAuthToken";
 import {getJWKSet} from "./key";
+import {IncomingHttpHeaders} from "http";
+import {EmptyTokenError} from "./Errors/EmptyTokenError";
 
 /**
  * Authenticate a provided token into and return a valid PebbleAuthToken object
@@ -25,7 +27,12 @@ export async function auth(token: string): Promise<PebbleAuthTokenInterface>
 /**
  * Authenticate user using the HTTP Authorization header provided with the request
  */
-export async function authFromHttpHeaders(): Promise<PebbleAuthTokenInterface>
+export async function authFromHttpHeaders(headers: IncomingHttpHeaders): Promise<PebbleAuthTokenInterface>
 {
-    return await auth("http_provided_token")
+    if (headers.authorization) {
+        const token = headers.authorization.replace(/^Bearer /, "")
+        return await auth(token)
+    }
+
+    throw new EmptyTokenError()
 }

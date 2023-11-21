@@ -60,16 +60,22 @@ client request. Authorization header must start with _Bearer_ string followed by
 a valid JWT.
 
 ```TypeScript
-import {authFromHttpHeaders} from "@pebble-solutions/pebble-auth-client"
+const { authFromHttpHeaders } = require('@pebble-solutions/pebble-auth-client')
+const http = require('http')
 
-try {
-    const authToken = await authFromHttpHeaders()
-    
-    console.log(authToken)
-    console.log(authToken.getUser())
-    console.log(authToken.getAuthenticatedLicence())
-}
-catch (e) {
-    console.error(e.message)
-}
+const server = http.createServer(async (req, res) => {
+    try {
+        const pblToken = await authFromHttpHeaders(req.headers)
+        console.log(pblToken)
+        console.log(pblToken.getUser())
+        console.log(pblToken.getAuthenticatedLicence())
+        res.end("You are authenticated");
+    }
+    catch (e) {
+        res.writeHead(401);
+        res.end(e.message)
+    }
+});
+
+server.listen(process.env.PORT || 3000)
 ```
