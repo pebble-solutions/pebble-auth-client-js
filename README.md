@@ -38,9 +38,8 @@ RUN export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 
 ### Test keys pair
 
-[!WARNING]
-These key files are not secured and must be used FOR TESTING PURPOSE 
-ONLY on a local development environment !
+> [!WARNING]  
+> These key files are not secured and must be used FOR TESTING PURPOSE ONLY on a local development environment !
 
 **JWKS URI (for PBL_JWKS_REMOTE_URI environment variable)**
 
