@@ -22,9 +22,7 @@ const CERTS_FOLDER: string = "./var/credentials/auth"
 const JWKS_LOCAL_PATH: string = CERTS_FOLDER+"/jwks.json"
 
 /**
- * Get the public keys stored in /var/credentials/auth/certs
- * This file contain a copy of the pebble auth public keys formatted in
- * JWK Set format.
+ * Return all the JWK currently stored in jwks.json file or in the process memory.
  */
 export async function getJWKSet(): Promise<JSONWebKeySet>
 {
@@ -60,8 +58,7 @@ export function importRemotePublicKey(remoteLocation: string): Promise<void>
 }
 
 /**
- * Read the public RSA key from /var/credentials/auth/certs and convert it into
- * JWK Set
+ * Read the public RSA key from /var/credentials/auth/jwks.json and convert it into JWK Set
  */
 async function readPublicKey(): Promise<JSONWebKeySet>
 {

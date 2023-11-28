@@ -4,13 +4,17 @@ import PebbleAuthToken from "../Models/PebbleAuthToken";
 import User from "../Models/User";
 import {JWTPayload} from "jose";
 
+/**
+ * Provide all token data and generate a new AuthenticatedLicenceObject instance.
+ *
+ * @param tokenData PebbleTokenData
+ */
 export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): AuthenticatedLicenceObject
 {
     return {
         app: tokenData.aud,
         id: tokenData.iss,
         tenant_id: tokenData.tid,
-        token: new PebbleAuthToken(tokenData),
         user: new User({
             username: tokenData.sub,
             roles: tokenData.roles,
@@ -20,6 +24,12 @@ export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): Authe
     }
 }
 
+/**
+ * Generated a PebbleTokenData instance from a dict representation of the JWT and the token string.
+ *
+ * @param jwtPayload            all information stored in the token
+ * @param token                 original JWT string
+ */
 export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string): PebbleTokenData
 {
     return {

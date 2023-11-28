@@ -2,9 +2,23 @@ import PebbleAuthTokenInterface from "../Interfaces/PebbleAuthTokenInterface";
 import UserInterface from "../Interfaces/UserInterface";
 
 export type AuthenticatedLicenceObject = {
+    /**
+     * Application for which the licence is generated
+     */
     app: string,
+
+    /**
+     * Licence ID as registered in the Licence server
+     */
     id: string,
+
+    /**
+     * Customer id, client id... that will consume resources
+     */
     tenant_id: string,
-    token: PebbleAuthTokenInterface,
+
+    /**
+     * Instance of User class who own the licence
+     */
     user: UserInterface
 }

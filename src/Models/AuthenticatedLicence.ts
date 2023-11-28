@@ -1,7 +1,12 @@
 import AuthenticatedLicenceInterface from "../Interfaces/AuthenticatedLicenceInterface";
 import UserInterface from "../Interfaces/UserInterface";
-import {AuthenticatedLicenceObject} from "../Types/AuthenticatedLicenceObject";
+import {AuthenticatedLicenceObject} from "../Types";
 
+/**
+ * This object represent information stored in a licence owned by a user.
+ *
+ * @param tokenData AuthenticatedLicenceObject
+ */
 export default class AuthenticatedLicence implements AuthenticatedLicenceInterface
 {
     app: string;
@@ -16,6 +21,9 @@ export default class AuthenticatedLicence implements AuthenticatedLicenceInterfa
         this.user = tokenData.user
     }
 
+    /**
+     * Return the user who own the licence
+     */
     getUser(): UserInterface {
         return this.user;
     }
