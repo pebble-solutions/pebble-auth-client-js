@@ -33,7 +33,7 @@ export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 line to your Dockefile :**
 
 ```Dockerfile
-RUN export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
+ENV PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json
 ```
 
 ### Test keys pair
