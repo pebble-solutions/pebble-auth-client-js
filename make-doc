@@ -1,0 +1,15 @@
+#!/bin/bash
+
+npx typedoc
+
+read -p "Do you want to commit and publish documentation ? (y/n) " yn
+
+case $yn in
+  [Yy] ) echo "Publishing documentation..."
+    git add docs/
+    git commit -m "Generate documentation"
+    git push
+    exit;;
+  * ) echo "Abort. Documentation is generated locally. You can publish to github by adding docs/ directory, commit and then push"
+    exit;;
+esac
