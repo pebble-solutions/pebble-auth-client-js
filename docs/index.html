@@ -13,7 +13,7 @@ your terminal before starting your NodeJS server :</strong></p>
 </code><button>Copy</button></pre>
 <p><strong>If you start your NodeJS server within a Docker container, you should add this
 line to your Dockefile :</strong></p>
-<pre><code class="language-Dockerfile"><span class="hl-3">RUN</span><span class="hl-1"> export PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json</span>
+<pre><code class="language-Dockerfile"><span class="hl-3">ENV</span><span class="hl-1"> PBL_JWKS_REMOTE_URI=https://SERVER_URI/path/jwks.json</span>
 </code><button>Copy</button></pre>
 <a id="md:test-keys-pair" class="tsd-anchor"></a><h3><a href="#md:test-keys-pair">Test keys pair</a></h3><blockquote>
 <p>[!WARNING]<br>These key files are not secured and must be used FOR TESTING PURPOSE ONLY on a local development environment !</p>

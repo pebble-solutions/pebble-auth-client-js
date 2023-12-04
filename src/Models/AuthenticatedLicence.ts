@@ -11,7 +11,7 @@ export default class AuthenticatedLicence implements AuthenticatedLicenceInterfa
 {
     app: string;
     id: string;
-    tenant_id: string;
+    tenant_id?: string;
     user: UserInterface;
 
     constructor(tokenData: AuthenticatedLicenceObject) {

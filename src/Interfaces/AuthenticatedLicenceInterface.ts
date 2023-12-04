@@ -20,7 +20,7 @@ export default interface AuthenticatedLicenceInterface {
     /**
      * Customer id, client id... that will consume resources
      */
-    tenant_id: string
+    tenant_id?: string
 
     /**
      * Should return the user who own the licence

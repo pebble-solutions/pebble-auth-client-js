@@ -1,6 +1,5 @@
-import {AuthenticatedLicenceObject} from "../Types/AuthenticatedLicenceObject";
-import {PebbleTokenData} from "../Types/PebbleTokenData";
-import PebbleAuthToken from "../Models/PebbleAuthToken";
+import {AuthenticatedLicenceObject} from "../Types";
+import {PebbleTokenData} from "../Types";
 import User from "../Models/User";
 import {JWTPayload} from "jose";
 
@@ -35,10 +34,10 @@ export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string
     return {
         aud: <string>jwtPayload.aud,
         iss: <string>jwtPayload.iss,
-        tid: <string>jwtPayload.tid,
+        tid: <string | undefined>jwtPayload.tid,
         sub: <string>jwtPayload.sub,
-        roles: <string[]>jwtPayload.roles,
-        lv: <number>jwtPayload.lv,
+        roles: <string[] | undefined>jwtPayload.roles,
+        lv: <number | undefined>jwtPayload.lv,
         name: <string>jwtPayload.name,
         iat: jwtPayload.iat,
         exp: <number>jwtPayload.exp,

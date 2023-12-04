@@ -46,7 +46,7 @@ export default interface PebbleAuthTokenInterface {
     /**
      * Tenant ID : customer id, client id... that will consume resources
      */
-    tid: string;
+    tid?: string;
 
     /**
      * Token from which datas has been deserialized

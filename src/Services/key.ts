@@ -1,8 +1,8 @@
 import {JSONWebKeySet} from "jose";
 import { get as getHttps } from "https"
 import { createWriteStream, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs"
-import {EmptyJWKSRemoteURIError} from "./Errors/EmptyJWKSRemoteURIError";
-import {EmptyJWKSError} from "./Errors/EmptyJWKSError";
+import {EmptyJWKSRemoteURIError} from "./Errors";
+import {EmptyJWKSError} from "./Errors";
 
 /**
  * Return the location of remote pebble authenticator public keys set (JWKS) as defined in the sys global

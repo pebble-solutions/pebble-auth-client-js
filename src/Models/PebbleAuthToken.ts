@@ -20,7 +20,7 @@ export default class PebbleAuthToken implements PebbleAuthTokenInterface
     name?: string;
     roles?: string[];
     sub: string;
-    tid: string;
+    tid?: string;
     token: string;
 
     constructor(token: PebbleTokenData) {

@@ -15,7 +15,7 @@ export type AuthenticatedLicenceObject = {
     /**
      * Customer id, client id... that will consume resources
      */
-    tenant_id: string,
+    tenant_id?: string,
 
     /**
      * Instance of User class who own the licence
