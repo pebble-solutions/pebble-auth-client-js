@@ -1,5 +1,10 @@
 import UserInterface from "../Interfaces/UserInterface";
 import { UserObject } from "../Types/UserObject";
+/**
+ * This object represent an authenticated user.
+ *
+ * @param user UserObject
+ */
 export default class User implements UserInterface {
     displayName?: string;
     level?: number;

@@ -1,8 +1,6 @@
 import { JSONWebKeySet } from "jose";
 /**
- * Get the public keys stored in /var/credentials/auth/certs
- * This file contain a copy of the pebble auth public keys formatted in
- * JWK Set format.
+ * Return all the JWK currently stored in jwks.json file or in the process memory.
  */
 export declare function getJWKSet(): Promise<JSONWebKeySet>;
 /**
