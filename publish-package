@@ -9,6 +9,7 @@ read -p "Which version type is going to be deployed ? (major/minor/patch) " type
 case $type in
   major|minor|patch ) echo "Publishing $type version..."
     npm version "$type"
+    npx tsc
     npm publish
     git push
     exit;;
