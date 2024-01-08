@@ -43,6 +43,7 @@ export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string
         exp: <number>jwtPayload.exp,
         client_id: <string>jwtPayload.client_id,
         jti: <string>jwtPayload.jti,
+        scope: <string>jwtPayload.scope,
         token
     }
 }

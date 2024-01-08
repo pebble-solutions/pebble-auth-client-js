@@ -3,12 +3,15 @@ import AuthenticatedLicenceInterface from "../Interfaces/AuthenticatedLicenceInt
 import UserInterface from "../Interfaces/UserInterface";
 import { PebbleTokenData } from "../Types";
 /**
- * his object represent all the information in a token provided by a Pebble licence server.
+ * This object represent all the information in a token provided by a Pebble licence server.
+ *
+ * It implements the RFC9068 standard that document profile for oAuth 2.0 JWT access token.
+ * Read more : https://datatracker.ietf.org/doc/html/rfc9068
  *
  * @param token PebbleTokenData
  */
 export default class PebbleAuthToken implements PebbleAuthTokenInterface {
-    aud: string | string[] | undefined;
+    aud: string | string[];
     exp: number;
     iat?: number;
     iss: string;
@@ -18,7 +21,8 @@ export default class PebbleAuthToken implements PebbleAuthTokenInterface {
     scopes?: string[];
     sub: string;
     tid?: string;
-    client_id?: string;
+    client_id: string;
+    jti: string;
     token: string;
     constructor(token: PebbleTokenData);
     /**

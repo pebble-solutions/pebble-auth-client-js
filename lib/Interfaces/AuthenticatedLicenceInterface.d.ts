@@ -7,7 +7,7 @@ export default interface AuthenticatedLicenceInterface {
     /**
      * Licence server that emits the authorisation
      */
-    issuer: string;
+    issuer?: string;
     /**
      * Application for which the licence is generated. This can be the application name or the client ID
      */
