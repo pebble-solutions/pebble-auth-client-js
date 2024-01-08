@@ -10,7 +10,7 @@ import {AuthenticatedLicenceObject} from "../Types";
 export default class AuthenticatedLicence implements AuthenticatedLicenceInterface
 {
     app?: string;
-    issuer: string;
+    issuer?: string;
     tenant_id?: string;
     user: UserInterface;
 

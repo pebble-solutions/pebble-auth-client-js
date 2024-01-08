@@ -5,13 +5,13 @@ export default interface AuthenticatedLicenceInterface {
      */
     user: UserInterface;
     /**
-     * Licence ID as registered in the Licence server
+     * Licence server that emits the authorisation
      */
-    id: string;
+    issuer: string;
     /**
-     * Application for which the licence is generated
+     * Application for which the licence is generated. This can be the application name or the client ID
      */
-    app: string;
+    app?: string;
     /**
      * Customer id, client id... that will consume resources
      */

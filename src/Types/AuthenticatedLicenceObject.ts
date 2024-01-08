@@ -10,7 +10,7 @@ export type AuthenticatedLicenceObject = {
     /**
      * Licence server that emits the authorisation
      */
-    issuer: string,
+    issuer?: string,
 
     /**
      * Customer id, client id... that will consume resources

@@ -32,7 +32,7 @@ export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): Authe
 export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string): PebbleTokenData
 {
     return {
-        aud: <string | string[] | undefined>jwtPayload.aud,
+        aud: <string | string[]>jwtPayload.aud,
         iss: <string>jwtPayload.iss,
         tid: <string | undefined>jwtPayload.tid,
         sub: <string>jwtPayload.sub,
@@ -41,7 +41,8 @@ export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string
         name: <string>jwtPayload.name,
         iat: jwtPayload.iat,
         exp: <number>jwtPayload.exp,
-        client_id: <string | undefined>jwtPayload.client_id,
+        client_id: <string>jwtPayload.client_id,
+        jti: <string>jwtPayload.jti,
         token
     }
 }

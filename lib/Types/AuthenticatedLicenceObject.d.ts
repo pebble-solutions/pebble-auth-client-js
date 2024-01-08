@@ -3,11 +3,11 @@ export type AuthenticatedLicenceObject = {
     /**
      * Application for which the licence is generated
      */
-    app: string;
+    app?: string;
     /**
-     * Licence ID as registered in the Licence server
+     * Licence server that emits the authorisation
      */
-    id: string;
+    issuer: string;
     /**
      * Customer id, client id... that will consume resources
      */

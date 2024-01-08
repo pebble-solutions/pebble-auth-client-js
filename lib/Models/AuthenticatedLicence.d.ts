@@ -7,8 +7,8 @@ import { AuthenticatedLicenceObject } from "../Types";
  * @param tokenData AuthenticatedLicenceObject
  */
 export default class AuthenticatedLicence implements AuthenticatedLicenceInterface {
-    app: string;
-    id: string;
+    app?: string;
+    issuer: string;
     tenant_id?: string;
     user: UserInterface;
     constructor(tokenData: AuthenticatedLicenceObject);
