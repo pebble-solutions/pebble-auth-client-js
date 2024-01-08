@@ -13,7 +13,7 @@ export default interface AuthenticatedLicenceInterface {
     id: string
 
     /**
-     * Application for which the licence is generated
+     * Application for which the licence is generated. This can be the application name or the client ID
      */
     app: string
 

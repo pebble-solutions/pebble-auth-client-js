@@ -11,8 +11,8 @@ import {JWTPayload} from "jose";
 export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): AuthenticatedLicenceObject
 {
     return {
-        app: tokenData.aud,
-        id: tokenData.iss,
+        app: tokenData.client_id,
+        issuer: tokenData.iss,
         tenant_id: tokenData.tid,
         user: new User({
             username: tokenData.sub,
@@ -32,7 +32,7 @@ export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): Authe
 export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string): PebbleTokenData
 {
     return {
-        aud: <string>jwtPayload.aud,
+        aud: <string | string[] | undefined>jwtPayload.aud,
         iss: <string>jwtPayload.iss,
         tid: <string | undefined>jwtPayload.tid,
         sub: <string>jwtPayload.sub,
@@ -41,6 +41,7 @@ export function getTokenDataFromJWTPayload(jwtPayload: JWTPayload, token: string
         name: <string>jwtPayload.name,
         iat: jwtPayload.iat,
         exp: <number>jwtPayload.exp,
+        client_id: <string | undefined>jwtPayload.client_id,
         token
     }
 }

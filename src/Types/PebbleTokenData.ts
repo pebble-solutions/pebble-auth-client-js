@@ -2,7 +2,7 @@ export type PebbleTokenData = {
     /**
      * Application for which the token is generated
      */
-    aud: string,
+    aud: string | string[] | undefined,
 
     /**
      * Expiration timestamp
@@ -35,6 +35,11 @@ export type PebbleTokenData = {
     roles?: string[],
 
     /**
+     * List of default scopes granted by the licence
+     */
+    scopes?: string[],
+
+    /**
      * User email (used as username)
      */
     sub: string,
@@ -43,6 +48,11 @@ export type PebbleTokenData = {
      * Tenant ID : customer id, client id... that will consume resources
      */
     tid?: string,
+
+    /**
+     * The application ID registered in firestore. This refers to the frontend application that consume the resources.
+     */
+    client_id?: string,
 
     /**
      * Token from which datas has been deserialized

@@ -4,7 +4,7 @@ import {getTokenDataFromJWTPayload} from "./token";
 import PebbleAuthToken from "../Models/PebbleAuthToken";
 import {getJWKSet} from "./key";
 import {IncomingHttpHeaders} from "http";
-import {EmptyTokenError} from "./Errors/EmptyTokenError";
+import {EmptyTokenError} from "./Errors";
 
 /**
  * Authenticate a provided token into and return a valid PebbleAuthToken object

@@ -6,7 +6,7 @@ export default interface PebbleAuthTokenInterface {
     /**
      * Application for which the token is generated
      */
-    aud: string;
+    aud: string | string[] | undefined;
 
     /**
      * Expiration timestamp
@@ -34,9 +34,15 @@ export default interface PebbleAuthTokenInterface {
     name?: string;
 
     /**
-     * Roles attributed to the user
+     * User roles (for descriptive matter, eg. in order to show or hide elements in frontend interface)
+     * Ex : ["ROLE_MANAGER", "ROLE_ACCOUNTING"]
      */
-    roles?: string[];
+    roles?: string[]
+
+    /**
+     * List of granted scopes
+     */
+    scopes?: string[]
 
     /**
      * User email (used as username)
