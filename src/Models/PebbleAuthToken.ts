@@ -22,7 +22,7 @@ export default class PebbleAuthToken implements PebbleAuthTokenInterface
     lv?: number;
     name?: string;
     roles?: string[];
-    scopes?: string[];
+    scope?: string;
     sub: string;
     tid?: string;
     client_id: string;
@@ -37,7 +37,7 @@ export default class PebbleAuthToken implements PebbleAuthTokenInterface
         this.lv = token.lv
         this.name = token.name
         this.roles = token.roles
-        this.scopes = token.scopes
+        this.scope = token.scope
         this.sub = token.sub
         this.tid = token.tid
         this.client_id = token.client_id
