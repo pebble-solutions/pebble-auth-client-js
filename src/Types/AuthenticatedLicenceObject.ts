@@ -8,7 +8,7 @@ export type AuthenticatedLicenceObject = {
     app?: string,
 
     /**
-     * Licence server that issued the authorisation
+     * Licence server that emits the authorisation
      */
     issuer: string,
 

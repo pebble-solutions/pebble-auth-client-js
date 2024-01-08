@@ -9,14 +9,14 @@ import {AuthenticatedLicenceObject} from "../Types";
  */
 export default class AuthenticatedLicence implements AuthenticatedLicenceInterface
 {
-    app: string;
-    id: string;
+    app?: string;
+    issuer: string;
     tenant_id?: string;
     user: UserInterface;
 
     constructor(tokenData: AuthenticatedLicenceObject) {
         this.app = tokenData.app
-        this.id = tokenData.id
+        this.issuer = tokenData.issuer
         this.tenant_id = tokenData.tenant_id
         this.user = tokenData.user
     }
