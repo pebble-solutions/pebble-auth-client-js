@@ -18,7 +18,7 @@ export default class PebbleAuthToken implements PebbleAuthTokenInterface {
     lv?: number;
     name?: string;
     roles?: string[];
-    scopes?: string[];
+    scope?: string;
     sub: string;
     tid?: string;
     client_id: string;

@@ -18,7 +18,8 @@ export function getLicenceObjectFromTokenData(tokenData: PebbleTokenData): Authe
             username: tokenData.sub,
             roles: tokenData.roles,
             level: tokenData.lv,
-            displayName: tokenData.name
+            displayName: tokenData.name,
+            scopes: tokenData.scope?.split(" ")
         })
     }
 }

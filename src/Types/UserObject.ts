@@ -18,4 +18,9 @@ export type UserObject = {
      * Roles affected to the user
      */
     roles?: string[]
+
+    /**
+     * Granted scopes onto the resource API
+     */
+    scopes?: string[]
 }

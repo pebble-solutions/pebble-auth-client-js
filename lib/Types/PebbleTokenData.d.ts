@@ -28,9 +28,9 @@ export type PebbleTokenData = {
      */
     roles?: string[];
     /**
-     * List of default scopes granted by the licence
+     * List of scope granted by the token onto the audience. Each term is separated by a space.
      */
-    scopes?: string[];
+    scope?: string;
     /**
      * User email (used as username)
      */

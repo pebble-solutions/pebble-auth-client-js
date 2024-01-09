@@ -1,27 +1,7 @@
 import UserInterface from "./UserInterface";
+import {AuthenticatedLicenceObject} from "../Types";
 
-export default interface AuthenticatedLicenceInterface {
-
-    /**
-     * Instance of User class who own the licence
-     */
-    user: UserInterface
-
-    /**
-     * Licence server that emits the authorisation
-     */
-    issuer?: string
-
-    /**
-     * Application for which the licence is generated. This can be the application name or the client ID
-     */
-    app?: string
-
-    /**
-     * Customer id, client id... that will consume resources
-     */
-    tenant_id?: string
-
+export default interface AuthenticatedLicenceInterface extends AuthenticatedLicenceObject {
     /**
      * Should return the user who own the licence
      */
